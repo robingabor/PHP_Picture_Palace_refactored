@@ -1,0 +1,318 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+:root{
+    --modale-duration: 1.5s;
+    --primary-color:#30336b;
+    --secondary-color: #be2edd;
+    --form-bg : #f9fafb;
+    --input-bg:#f0f0f0;
+    --input-border  :#777;
+    --input-success:#2ecc71;
+    --input-error : #e74c3c;
+    --blue-color : #3498db;
+}
+
+*{
+    box-sizing: border-box;    
+}
+
+body{
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    /* to smooth our transition */
+    transition: transform 0.9s ease;
+}
+
+body.show-nav{
+    /* Width of the nav */
+    transform: translateX(150px);
+    overflow: hidden;
+}
+
+nav{
+    background-color: var(--primary-color);
+    border-right: 2px solid rgba(200, 200, 200, 0.1);
+    color: #fff;
+    position: fixed;
+    top:0;
+    left: 0;
+
+    width: 100%;
+    max-width: 150px;
+    height: 100vh;
+    /* we want to make sure it is always on top */
+    z-index: 100;
+    /* translate the navbar on the X axis by -100% */
+    transform: translateX(-100%);
+}
+
+nav .logo{
+    padding: 30px 0px;
+    text-align: center;    
+}
+nav .logo img{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+}
+
+nav ul{
+    padding: 0;
+    list-style-type: none;
+    margin:0;
+}
+
+nav ul li{
+    border-bottom: 2px solid rgba(200, 200, 200, 0.1);
+    padding: 20px;
+}
+
+nav ul li:first-child{
+    border-top : 2px solid rgba(200, 200, 200, 0.1);
+}
+
+nav ul li a{
+    color: #fff;
+    text-decoration: none;
+}
+
+nav ul li a:hover{    
+    text-decoration: underline;
+}
+
+.container{
+    padding: 15px;
+    margin: auto;
+    width: 100%;
+    max-width: 800px;
+}
+
+header{
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 130%;
+    /* we position it relative bc we want to position the toggle btn inside it absoulute and it has to have a relative container in order to do that*/
+    position: relative;
+    padding: 40px 15px;
+    text-align: center;
+}
+
+header h1{
+    margin: 0;
+}
+
+header p{
+    margin: 30px 0px;
+}
+
+button, input[type='submit']{
+    background-color: var(--secondary-color);
+    border: 0;
+    border-radius: 5px;
+    color:#fff;
+    cursor: pointer;
+    padding: 8px 12px;
+    display: block;
+    margin-top: 20px;
+    /* width: 100%; */
+}
+
+button:focus{
+    outline: none;
+}
+
+.toggle{
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.cta-btn{
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* it is going to be like an overlay */
+.modal-container{
+    background-color: rgba(0, 0, 0, 0.7);
+    /* initially we want to hide it */
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Class to show our modal */
+.modal-container.show-modal{
+    display: block;    
+}
+
+
+.modal{
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    position: absolute;
+    /* we do not want any scrollbar  */
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    /* we want our modal directly in the middle */
+    transform:translate(-50%,-50%);
+    width: 100%;
+    max-width: 400px;
+    /* we want the modal to fade in */
+    animation-name: modalopen;
+    animation-duration: var(--modale-duration);
+}
+
+.modal-header{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0px 15px;
+    display: flex;
+}
+
+.modal-header h3{
+    justify-content: space-around;
+    margin: 0;
+    padding: 15px;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.modal-content{
+    padding: 20px;
+}
+
+/* each modal form input is weapped in a div  */
+.modal-form div{
+    margin: 15px 0;
+}
+
+.modal-form label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modal-form .form-input{
+    padding: 8px;
+    width: 100%;
+}
+
+.close-btn{
+    background: transparent;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+
+/* Signup and Login section */
+
+.wrapper{
+    background-color: var(--form-bg);
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin: auto;
+    max-width: 400px;
+    width: 100%;
+}
+
+#signup-form{
+    padding: 30px 40px;
+}
+
+#signup-form h2{
+    text-align: center;
+    margin: 0 0 20px;
+}
+
+.form-control{
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.form-control input{
+    border: 2px solid var(--input-bg);
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;    
+}
+
+.form-control input:focus{
+    outline: 0;
+    border-color: var(--input-border);
+}
+
+/* we want the border color to be green around our input if it is okay */
+.form-control.success input{
+    border-color: var(--input-success);
+}
+
+/* we want the border color to be red around our input if it has an error */
+.form-control.error input{
+    border-color: var(--input-error);
+}
+
+.form-control small{
+    color: var(--input-error);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-weight: 600;
+    /* we want to hide the error messages initially */
+    /* it is not the same as display : none the main difference is that using this way it going to be invisible */
+    /* display: none    would collapse everything around it */
+    visibility: hidden;
+}
+
+.form-control.error small{
+    visibility: visible;
+}
+
+.errors{
+    color: red;
+    font-weight: 600;
+}
+
+.center{    
+    margin: auto;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 25px;  
+    margin-bottom: 40px;        
+}
+
+.center h3{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #742297;
+}
+.center p{
+    text-align: center;    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+}
+
+.center p a{
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* ! Signup and Login section */
+
+@keyframes modalopen {
+    /* we going from invisible to visible */
+    from{        
+        opacity: 0;
+    }to{
+        opacity: 1;
+    }
+}
